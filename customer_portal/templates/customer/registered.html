@@ -1,0 +1,13 @@
+{% extends 'car_dealer/base.html' %}
+{% block content %}
+{% csrf_token %}
+
+<div class="w3-center">
+<p class="w3-large">
+Registered Successfully !
+</p>
+<p class="w3-large">
+Now go to the <a class="w3-btn w3-teal" style="background-color:purple;" href="/customer_portal/login/">Login Page<a> and Login !
+</p>
+</div>
+{% endblock %}

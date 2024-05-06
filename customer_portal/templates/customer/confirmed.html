@@ -1,0 +1,23 @@
+{% extends 'customer/base.html' %}
+{% block content %}
+{% comment %} <div class="w3-bar w3-large w3-black">
+  <div class="w3-bar-item w3-left w3-black">Customer Portal: {{user.username}}</div>
+  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/logout/">Logout</a>
+  <a class="w3-bar-item w3-btn w3-teal w3-right" href="/customer_portal/manage/">Manage</a>
+  <a class="w3-ber-item w3-btn w3-teal w3-right" href="/customer_portal/search/">Search Cars</a>
+</div> {% endcomment %}
+{% csrf_token %}
+
+<div class="w3-display-container" style="height:400px;">
+  <div class="w3-display-middle">
+    <h3><b>Order Completed</b></h3>
+    <b>Your House Order Has Been Processed!</b><br><br>
+    <b>Total Rent :</b> ${{ order.rent }}<br><br>
+    <b>House :</b> {{ order.house }}<br><br>
+    <b>Duration :</b> {{ order.days }} days<br><br>
+    <b>House Owner :</b> {{ order.house_owner.first_name }} {{ order.house_owner.last_name }}<br><br>
+    <b>House Owner's Contact:</b> {{ order.house_owner.mobile }}<br><br>
+  </div>
+</div>
+
+{% endblock %}

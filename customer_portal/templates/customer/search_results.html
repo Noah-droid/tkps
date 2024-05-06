@@ -1,0 +1,97 @@
+{% extends 'customer/base1.html' %}
+{% load static %}
+{% block content %}
+
+
+<h3 class="w3-center" style="padding-top:30"><b>Search Results</b></h3>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<section class="property-grid grid">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="grid-option">
+        
+        </div>
+      </div>
+
+      {% for house in request.session.houses_list %}
+      <div class="col-lg-6">
+        <div class="card-box-a card-shadow">
+          <div class="img-box-a">
+            <img src="{{ house.image_url }}" alt="" height="1000" class="img-a img-fluid">
+          </div>
+          <div class="card-overlay">
+            <div class="card-overlay-a-content">
+              <div class="card-header-a">
+                <h2 class="card-title-a">
+                  <a href="#">204 Mount
+                    <br /> {{ house.description }}</a>
+                </h2>
+              </div>
+              <div class="card-body-a">
+                <div class="price-box d-flex">
+                  <span class="price-a">rent | #{{house.price}}</span>
+                </div>
+                <form action="/customer_portal/rent/" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{ house.id }}">
+                <input type="submit" value="Click here to view">
+                  <span class="bi bi-chevron-right"></span>
+                </a>
+
+              </form>
+              </div>
+              <div class="card-footer-a">
+                <ul class="card-info d-flex justify-content-around">
+                  <li>
+                    <h4 class="card-info-title">Area</h4>
+                    <span>{{ house.pincode }}
+           
+                    </span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title">Beds</h4>
+                    <span>{{ house.capacity }}</span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title">Baths</h4>
+                    <span>{{ house.bathrooms }}</span>
+                  </li>
+                  <li>
+                    <h4 class="card-info-title">Garages</h4>
+                    <span>1</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+      
+  </div>
+
+
+  
+</section>
+
+
+
+
+{% endblock %}
+
+
