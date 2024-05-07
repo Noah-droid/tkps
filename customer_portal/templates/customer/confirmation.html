@@ -1,5 +1,11 @@
 {% extends 'customer/base1.html' %}
 {% block content %}
+<style>
+  .card-box-ico{
+    display:none;
+  }
+</style>
+
 
 <main id="main">
 
@@ -59,10 +65,11 @@
               <div class="property-price d-flex justify-content-center foo">
                 <div class="card-header-c d-flex">
                   <div class="card-box-ico">
-                    <span class="bi bi-cash">₦</span>
+                  
                   </div>
                   <div class="card-title-c align-self-center">
-                    <h5 class="title-c">{{house.price}}</h5>
+                    
+                    <h5 class="title-c">  <span class="bi bi-cash">₦</span>{{house.price}}</h5>
                   </div>
                 </div>
               </div>
