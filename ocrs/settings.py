@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customer_portal',
-    'car_dealer_portal',
+    'house_portal',
     'home',
 
 ]

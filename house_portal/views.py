@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib import auth
-from car_dealer_portal.models import *
+from house_portal.models import *
 from customer_portal.models import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
@@ -27,7 +27,7 @@ def auth_view(request):
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         try:
-            car_dealer = CarDealer.objects.get(car_dealer = user)
+            car_dealer = Owner.objects.get(car_dealer = user)
         except:
             car_dealer = None
         if car_dealer is not None:
@@ -66,12 +66,12 @@ def registration(request):
     except:
         area = None
     if area is not None:
-        car_dealer = CarDealer(car_dealer = user, mobile = mobile, area=area)
+        car_dealer = Owner(car_dealer = user, mobile = mobile, area=area)
     else:
         area = Area(city = city, pincode = pincode)
         area.save()
         area = Area.objects.get(city = city, pincode = pincode)
-        car_dealer = CarDealer(car_dealer = user, mobile = mobile, area=area)
+        car_dealer = Owner(car_dealer = user, mobile = mobile, area=area)
     car_dealer.save()
     return render(request, 'car_dealer/registered.html')
 
@@ -79,7 +79,7 @@ def registration(request):
 def add_vehicle(request):
     car_name = request.POST['car_name']
     color = request.POST['color']
-    cd = CarDealer.objects.get(car_dealer=request.user)
+    cd = Owner.objects.get(car_dealer=request.user)
     city = request.POST['city']
     city = city.lower()
     pincode = request.POST['pincode']
@@ -103,7 +103,7 @@ def add_vehicle(request):
 def manage_House(request):
     username = request.user
     user = User.objects.get(username = username)
-    car_dealer = CarDealer.objects.get(car_dealer = user)
+    car_dealer = Owner.objects.get(car_dealer = user)
     vehicle_list = []
     House = House.objects.filter(dealer = car_dealer)
     for v in House:
@@ -114,8 +114,8 @@ def manage_House(request):
 def order_list(request):
     username = request.user
     user = User.objects.get(username = username)
-    car_dealer = CarDealer.objects.get(car_dealer = user)
-    orders = Orders.objects.filter(car_dealer = car_dealer)
+    owner = Owner.objects.get(car_dealer = user)
+    orders = Orders.objects.filter(owner = owner)
     order_list = []
     for o in orders:
         if o.is_complete == False:
@@ -137,7 +137,7 @@ def complete(request):
 @login_required
 def history(request):
     user = User.objects.get(username = request.user)
-    car_dealer = CarDealer.objects.get(car_dealer = user)
+    car_dealer = Owner.objects.get(car_dealer = user)
     orders = Orders.objects.filter(car_dealer = car_dealer)
     order_list = []
     for o in orders:
@@ -150,3 +150,6 @@ def delete(request):
     vehicle = House.objects.get(id = veh_id)
     vehicle.delete()
     return HttpResponseRedirect('/car_dealer_portal/manage_House/')
+
+
+

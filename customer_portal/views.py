@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate
 from django.contrib import auth
 from customer_portal.models import *
 from django.contrib.auth.decorators import login_required
-from car_dealer_portal.models import *
+from house_portal.models import *
 from django.http import HttpResponseRedirect
 # Create your views here.
 
@@ -20,7 +20,7 @@ def login(request):
 
 def auth_view(request):
     if request.user.is_authenticated:
-        return render(request, 'customer/home_page.html')
+        return render(request, 'customer/all_houses.html')
     else:
         username = request.POST['username']
         password = request.POST['password']
@@ -31,7 +31,7 @@ def auth_view(request):
             customer = None
         if customer is not None:
             auth.login(request, user)
-            return render(request, 'customer/home_page.html')
+            return render(request, 'customer/all_houses.html')
         else:
             return render(request, 'customer/login_failed.html')
 
@@ -42,37 +42,45 @@ def logout_view(request):
 def register(request):
     return render(request, 'customer/register.html')
 
-def registration(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    mobile = request.POST['mobile']
-    firstname = request.POST['firstname']
-    lastname = request.POST['lastname']
-    email = request.POST['email']
-    city = request.POST['city']
-    city = city.lower()
-    # pincode = request.POST['pincode']
-    try:
-        user = User.objects.create_user(username = username, password = password, email = email)
-        user.first_name = firstname
-        user.last_name = lastname
-        user.save()
-    except:
-        return render(request, 'customer/registration_error.html')
-    try:
-        area = Area.objects.get(city = city)
-    except:
-        area = None
-    if area is not None:
-        customer = Customer(user = user, mobile = mobile, area = area)
-    else:
-        area = Area(city = city)
-        area.save()
-        area = Area.objects.get(city = city)
-        customer = Customer(user = user, mobile = mobile, area = area)
 
-    customer.save()
-    return render(request, 'customer/registered.html')
+
+def registration(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        mobile = request.POST.get('mobile')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        email = request.POST.get('email')
+        city = request.POST.get('city')
+        city = city.lower()
+
+        # Check if the student field is provided in the form
+        is_student = request.POST.get('is_student') == 'on'
+
+        try:
+            user = User.objects.create_user(username=username, password=password, email=email)
+            user.first_name = firstname
+            user.last_name = lastname
+            user.save()
+        except Exception as e:
+            return render(request, 'customer/registration_error.html')
+
+        try:
+            area = Area.objects.get(city=city)
+        except Area.DoesNotExist:
+            area = Area.objects.create(city=city)
+
+        customer = Customer.objects.create(user=user, mobile=mobile, area=area)
+
+        # If the user is a student, create a StudentHouse instance for them
+        # if is_student:
+        #     student_house = StudentHouse.objects.create(house=customer.area.house_set.first(), is_student_only=True)
+
+        return render(request, 'customer/registered.html')
+
+    return render(request, 'customer/registration_form.html')
+
 
 # @login_required
 def search(request):
@@ -198,3 +206,12 @@ def delete_order(request):
     vehicle.save()
     order.delete()
     return HttpResponseRedirect('/customer_portal/manage/')
+
+
+
+
+
+
+def student_section(request):
+    student_houses = House.objects.filter(is_student_only=True)
+    return render(request, 'customer/student_section.html', {'student_houses': student_houses})

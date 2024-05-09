@@ -4,7 +4,7 @@ from customer_portal.views import *
 urlpatterns = [
     # path('index/', index, name='index'),
     path('login/', login, name='login'),
-    # path('auth/', auth_view, name='auth'),
+    path('auth/', auth_view, name='auth'),
     path('logout/', logout_view, name='logout'),
     path('register/', register, name='register'),
     path('registration/', registration, name='registration'),
@@ -16,4 +16,5 @@ urlpatterns = [
     path('update/', update_order, name='update'),
     path('delete/', delete_order, name='delete'),
     path('all/', all_houses, name='all'),
+    path('student_section/', student_section, name='student_section'),  # Add this line
 ]

@@ -69,7 +69,7 @@
             </div>
           </li> {% endcomment %}
           <li class="nav-item">
-            <a class="nav-link " href="contact.html">Contact</a>
+            <a class="nav-link " href="/customer_portal/student_section/">Student</a>
           </li>
 
           {% else %}
@@ -85,14 +85,18 @@
           <li class="nav-item">
             <a class="nav-link " href="/customer_portal/all/">Property</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link " href="/customer_portal/register/">Register</a>
+          </li>
           {%endif%}
 
         </ul>
       </div>
 
-      <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
+      {% comment %} <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
         <i class="bi bi-search"></i>
-      </button>
+      </button> {% endcomment %}
 
     </div>
   </nav>
