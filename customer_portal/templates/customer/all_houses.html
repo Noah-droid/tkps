@@ -59,7 +59,7 @@
                   </div>
                   <div class="card-body-a">
                     <div class="price-box d-flex">
-                      <span class="price-a">rent | ₦ {{house.price}}</span>
+                      <span class="price-a">₦ {{house.price}} | {{house.type}}</span>
                     </div>
                     <form action="/customer_portal/rent/" method="post">
                         {% csrf_token %}
@@ -86,10 +86,7 @@
                         <h4 class="card-info-title">Baths</h4>
                         <span>{{ house.bathrooms }}</span>
                       </li>
-                      <li>
-                        <h4 class="card-info-title">Garages</h4>
-                        <span>1</span>
-                      </li>
+                     
                     </ul>
                   </div>
                 </div>

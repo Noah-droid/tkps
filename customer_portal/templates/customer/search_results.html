@@ -30,19 +30,18 @@
       <div class="col-lg-6">
         <div class="card-box-a card-shadow">
           <div class="img-box-a">
-            <img src="{{ house.image_url }}" alt="" height="1000" class="img-a img-fluid">
+            <img src="{{ house.image_url }}" alt="" style="height: 500px;" class="img-a img-fluid">
           </div>
           <div class="card-overlay">
             <div class="card-overlay-a-content">
               <div class="card-header-a">
-                <h2 class="card-title-a">
-                  <a href="#">204 Mount
+                <h2 class="card-title-a">{{house.name}}
                     <br /> {{ house.description }}</a>
                 </h2>
               </div>
               <div class="card-body-a">
                 <div class="price-box d-flex">
-                  <span class="price-a">rent | #{{house.price}}</span>
+                  <span class="price-a">#{{house.price}} | {{house.type}}</span>
                 </div>
                 <form action="/customer_portal/rent/" method="post">
                   {% csrf_token %}

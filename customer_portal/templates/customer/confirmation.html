@@ -93,7 +93,7 @@
                     </li>
                     <li class="d-flex justify-content-between">
                       <strong>Property Type:</strong>
-                      <span>House</span>
+                      <span>{{house.type}}</span>
                     </li>
                 
                     <li class="d-flex justify-content-between">
@@ -102,14 +102,32 @@
                         <sup>2</sup>
                       </span>
                     </li>
+                    {% if house.type == 'Hotel' or house.type == 'Restaurant'  %}
+                    <li class="d-flex justify-content-between">
+                        
+                    </li>
+                    {% else %}
                     <li class="d-flex justify-content-between">
                       <strong>Beds:</strong>
-                      <span>{{house.bedrooms}}</span>
+                      <span>{{ house.bedrooms }}</span>
                     </li>
+                    
+                {% endif %}
+                
+                {% if house.type == 'Hotel' or house.type == 'Restaurant'  %}
+                <li class="d-flex justify-content-between">
+                    
+                </li>
+                {% else %}
+                    
                     <li class="d-flex justify-content-between">
                       <strong>Baths:</strong>
                       <span>{{house.bathrooms}}</span>
                     </li>
+
+                    {% endif %}
+
+                    
                     <li class="d-flex justify-content-between">
                       <strong>Garage:</strong>
                       <span>1</span>
@@ -122,7 +140,7 @@
               <div class="row">
                 <div class="col-sm-12">
                   <div class="title-box-d">
-                    <h3 class="title-d">Property Description</h3>
+                    <h3 class="title-d">Description</h3>
                   </div>
                 </div>
               </div>
@@ -156,11 +174,11 @@
           </div>
         </div>
 
-        {% if user.is_authenticated%}
+        {% comment %} {% if user.is_authenticated%}
 
         <form class="w3-container" action="/customer_portal/confirmed/" method="post">
           {% csrf_token %}
-          {% comment %} <b>Price : ₦{{house.price}} </b> {% endcomment %}
+         
           
           <input type="hidden" placeholder="2" name="days">
           <input class="w3-btn w3-teal" type="submit" value="Confirm My Order" style="padding: 10px 20px; background-color: purple; color: white; border: none; cursor: pointer; border-radius: 5px;">
@@ -169,14 +187,14 @@
           <br><br>
         </form>
 {% endif %}
-
+ {% endcomment %}
 
       
         <div class="col-md-12">
           <div class="row section-t3">
             <div class="col-sm-12">
               <div class="title-box-d">
-                <h3 class="title-d">Contact Agent</h3>
+                <h3 class="title-d">Contact </h3>
               </div>
             </div>
           </div>
@@ -184,19 +202,19 @@
             
             <div class="col-md-6 col-lg-4">
               <div class="property-agent">
-                <h4 class="title-agent">CareTaker</h4>
+               
                 <p class="color-text-a">
-                  Send a message to our CareTaker.
+                  Send a message to us.
                 </p>
                 <ul class="list-unstyled">
                   <li class="d-flex justify-content-between">
                     <strong>Phone:</strong>
-                    <span class="color-text-a">(234) 8112868762</span>
+                    <span class="color-text-a">{{house.phone}}</span>
                   </li>
              
                   <li class="d-flex justify-content-between">
                     <strong>Email:</strong>
-                    <span class="color-text-a">tkpstays@gmail.com</span>
+                    <span class="color-text-a">{{house.mail}}</span>
                   </li>
                  
                 </ul>

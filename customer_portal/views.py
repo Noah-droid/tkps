@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -84,7 +85,10 @@ def registration(request):
 
 # @login_required
 def search(request):
-    return render(request, 'customer/search.html')
+    houses = list(House.objects.all())  # Get all houses as a list
+    random.shuffle(houses)  # Shuffle the list randomly
+    selected_houses = houses[:3]  # Select the first 3 houses from the shuffled list
+    return render(request, 'customer/search.html',  {'houses': selected_houses})
 
 # @login_required
 def search_results(request):
@@ -96,7 +100,7 @@ def search_results(request):
         for house in houses:
             if house.is_available:
                 house_dictionary = {
-                    'name': house.house_name,
+                    'name': house.name,
                     'price': house.price,
                     'id': house.id,
                     'pincode': house.area.pincode,
@@ -125,8 +129,6 @@ def rent_vehicle(request):
 from django.shortcuts import get_object_or_404
 from .models import Orders
 
-from django.shortcuts import get_object_or_404
-from .models import Orders
 
 @login_required
 def confirm(request):

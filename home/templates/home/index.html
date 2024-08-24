@@ -34,7 +34,7 @@
   <!-- ======= Property Search Section ======= -->
 
   <!--/ Form Search Star /-->
- <!-- End Property Search Section -->>
+ <!-- End Property Search Section -->
 
   <!-- ======= Header/Navbar ======= -->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
@@ -44,7 +44,14 @@
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="/">TKP<span class="color">Stays</span></a>
+
+       <a class="navbar-brand" href="/">
+       
+      <img src="{% static 'assets/img/tkp.jpg' %}" alt="Logo" style="height: 100px; width: 100px; margin-right: 10px;">
+
+      {% comment %} <span class="text-brand">TKP<span class="color">Stays</span></span> {% endcomment %}
+
+      </a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
@@ -97,17 +104,18 @@
           <li class="nav-item">
             <a class="nav-link " href="/customer_portal/register/">Register</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/customer_portal/login/">Login</a>
+          </li>
           {%endif%}
 
         </ul>
       </div>
 
-      {% comment %} <button type="button" class="btn btn-b-n navbar-toggle-box navbar-toggle-box-collapse" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01">
-        <i class="bi bi-search"></i>
-      </button> {% endcomment %}
 
     </div>
-  </nav><!-- End Header/Navbar -->
+  </nav>
+  <!-- End Header/Navbar -->
 
   <!-- ======= Intro Section ======= -->
   <div class="intro intro-carousel swiper position-relative">
@@ -217,7 +225,8 @@
                   <span class="bi bi-cart"></span>
                 </div>
                 <div class="card-title-c align-self-center">
-                  <h2 class="title-c">Lifestyle</h2>
+              
+                  <h2 class="content-c">Lifestyle</h2>
                 </div>
               </div>
               <div class="card-body-c">
@@ -236,8 +245,8 @@
                 <div class="">
                   <span class="bi bi-calendar4-week"></span>
                 </div>
-                <div class="card-title-c align-self-center">
-                  <h2 class="title-c">Rent</h2>
+                <div class="title-box">
+                  <h2 class="content-c">Rent</h2>
                 </div>
               </div>
               <div class="card-body-c">
@@ -257,7 +266,7 @@
                   <span class="bi bi-card-checklist"></span>
                 </div>
                 <div class="card-title-c align-self-center">
-                  <h2 class="title-c">Explore</h2>
+                  <h2 class="content-c">Explore</h2>
                 </div>
               </div>
               <div class="card-body-c">

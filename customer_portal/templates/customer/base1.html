@@ -36,7 +36,12 @@
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="/">TKP<span class="color">Stays</span></a>
+
+      <a class="navbar-brand" href="/">
+       
+      <img src="{% static 'assets/img/tkp.jpg' %}" alt="Logo" style="height: 70px; width: 70px; margin-right: 10px;">
+
+      </a>
 
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
@@ -68,9 +73,9 @@
               <a class="dropdown-item " href="agent-single.html">Agent Single</a>
             </div>
           </li> {% endcomment %}
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link " href="/customer_portal/student_section/">Student</a>
-          </li>
+          </li> {% endcomment %}
 
           {% else %}
 
