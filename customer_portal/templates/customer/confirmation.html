@@ -246,7 +246,7 @@
             </div>
             <div class="col-md-6 col-lg-4">
               <div class="property-contact">
-                <form class="form-a">
+                <form class="form-a" onsubmit="sendEmail(event)">
                   <div class="row">
                     <div class="col-md-12 mb-1">
                       <div class="form-group">
@@ -268,6 +268,26 @@
                     </div>
                   </div>
                 </form>
+                
+                <script>
+                function sendEmail(event) {
+                  event.preventDefault(); // Prevent the default form submission
+                  
+                  // Get the form data
+                  const name = document.getElementById('inputName').value;
+                  const email = document.getElementById('inputEmail1').value;
+                  const message = document.getElementById('textMessage').value;
+                
+                  // Create the mailto link
+                  const subject = encodeURIComponent(`Message from ${name}`);
+                  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+                  const mailtoLink = `mailto:tkpstays@gmail.com?subject=${subject}&body=${body}`;
+                
+                  // Open the email client
+                  window.location.href = mailtoLink;
+                }
+                </script>
+                
               </div>
             </div>
           </div>
