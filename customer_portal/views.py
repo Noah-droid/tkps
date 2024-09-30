@@ -119,7 +119,7 @@ def all_houses(request):
     return render(request, 'customer/all_houses.html', {'houses': houses})
 
 
-# @login_required
+@login_required
 def rent_vehicle(request):
     id = request.POST['id']
     house = House.objects.get(id = id)

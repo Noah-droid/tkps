@@ -25,7 +25,7 @@ SECRET_KEY = 'bz1tc7706jpd$&mdq0&x*t&lccmrki+4=i2yfq3r@!ko%+wsd%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tkpstays.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'customer_portal',
     'house_portal',
+    'errand',
     'home',
 
 ]
