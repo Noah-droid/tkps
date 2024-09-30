@@ -1,0 +1,18 @@
+<h2>Your Rental History</h2>
+<ul>
+    {% for rental in rentals %}
+        <li>
+            {% if rental.item.image %}
+                <img src="{{ rental.item.image.url }}" alt="{{ rental.item.name }}" style="width: 200px; height: auto;">
+            {% endif %}
+            <strong>{{ rental.item.name }}</strong> - Rented on {{ rental.rental_date }} 
+            {% if rental.return_date %}
+                - Returned on {{ rental.return_date }}
+            {% else %}
+                <a href="{% url 'return_item' rental.id %}">Return this item</a>
+            {% endif %}
+        </li>
+    {% empty %}
+        <li>You have no rental history.</li>
+    {% endfor %}
+</ul>

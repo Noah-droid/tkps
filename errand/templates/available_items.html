@@ -1,0 +1,14 @@
+<h2>Available Gadgets for Rent</h2>
+<ul>
+    {% for item in items %}
+        <li>
+            {% if item.image %}
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 200px; height: auto;">
+            {% endif %}
+            <strong>{{ item.name }}</strong> - {{ item.description }} - ${{ item.rental_price }}
+            <a href="{% url 'rent_item' item.id %}">Rent this item</a>
+        </li>
+    {% empty %}
+        <li>No items available for rent.</li>
+    {% endfor %}
+</ul>
