@@ -1,14 +1,149 @@
-<h2>Available Gadgets for Rent</h2>
-<ul>
-    {% for item in items %}
-        <li>
-            {% if item.image %}
-                <img src="{{ item.image.url }}" alt="{{ item.name }}" style="width: 200px; height: auto;">
-            {% endif %}
-            <strong>{{ item.name }}</strong> - {{ item.description }} - ${{ item.rental_price }}
-            <a href="{% url 'rent_item' item.id %}">Rent this item</a>
-        </li>
-    {% empty %}
-        <li>No items available for rent.</li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    
+    header {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+    }
+    
+    main {
+        padding: 20px;
+    }
+    
+    .item-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .item {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(33.33% - 20px); /* Three items per row */
+        box-sizing: border-box;
+    }
+    
+    .item-image {
+        width: 100%;
+        height: auto;
+        max-width: 150px;
+        margin-bottom: 10px;
+    }
+    
+    .item-details {
+        text-align: center;
+    }
+    
+    .item-name {
+        font-size: 1.2em;
+        margin: 0;
+    }
+    
+    .item-description {
+        margin: 5px 0;
+    }
+    
+    .item-price {
+        font-weight: bold;
+        margin: 5px 0;
+    }
+    
+    .rent-button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    
+    .rent-button:hover {
+        background-color: #218838;
+    }
+    
+    .no-items {
+        color: #888;
+        text-align: center;
+        width: 100%;
+    }
+  
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .item {
+            width: calc(50% - 20px); /* Two items per row for smaller screens */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .item {
+            width: 100%; /* Full width on very small screens */
+        }
+    }
+</style>
+
+<main id="main">
+
+        <!-- ======= Intro Single ======= -->
+        <section class="intro-single">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 col-lg-8">
+                  <div class="title-single-box">
+                    <h1 class="title-single">Rentals</h1>
+                    <span class="color-text-a">List of all Properties Available for Rent</span>
+                  </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                  <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Rentals 
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+    <ul class="item-list">
+        {% for item in items %}
+            <li class="item">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image">
+                {% endif %}
+                <div class="item-details">
+                    <strong class="item-name">{{ item.name }}</strong>
+                    <p class="item-description">{{ item.description }}</p>
+                    <p class="item-price">Price: #{{ item.rental_price }}</p>
+                    <a href="{% url 'rent_item' item.id %}" class="rent-button">Rent this item</a>
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-items">No items available for rent.</li>
+        {% endfor %}
+    </ul>
+</main>
+
+{% endblock %}
