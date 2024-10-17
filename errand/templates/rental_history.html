@@ -1,18 +1,122 @@
-<h2>Your Rental History</h2>
-<ul>
-    {% for rental in rentals %}
-        <li>
-            {% if rental.item.image %}
-                <img src="{{ rental.item.image.url }}" alt="{{ rental.item.name }}" style="width: 200px; height: auto;">
-            {% endif %}
-            <strong>{{ rental.item.name }}</strong> - Rented on {{ rental.rental_date }} 
-            {% if rental.return_date %}
-                - Returned on {{ rental.return_date }}
-            {% else %}
-                <a href="{% url 'return_item' rental.id %}">Return this item</a>
-            {% endif %}
-        </li>
-    {% empty %}
-        <li>You have no rental history.</li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Rental History</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file for styling -->
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        
+        main {
+            padding: 20px;
+        }
+        
+        .item-list, .rental-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .item, .rental-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .item-image {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+        
+        .item-details {
+            flex: 1;
+        }
+        
+        .item-name {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        
+        .item-description {
+            margin: 5px 0;
+        }
+        
+        .item-price {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .rent-button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .rent-button:hover {
+            background-color: #218838;
+        }
+        
+        .no-items, .no-rentals {
+            color: #888;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+        
+    </style>
+    <header>
+        <h1>Your Rental History</h1>
+    </header>
+    
+    <main>
+        <ul class="rental-list">
+            {% for rental in rentals %}
+                <li class="rental-item">
+                    <strong class="rental-item-name">{{ rental.item.name }}</strong>
+                    <p class="rental-date">Rented on: {{ rental.rental_date|date:"F j, Y" }}</p>
+                    {% if rental.return_date %}
+                        <p class="return-date">Returned on: {{ rental.return_date|date:"F j, Y" }}</p>
+                    {% else %}
+                        <p class="not-returned">Not returned yet.</p>
+                    {% endif %}
+                </li>
+            {% empty %}
+                <li class="no-rentals">You have no rental history.</li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; {{ current_year }} Your Company Name. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
