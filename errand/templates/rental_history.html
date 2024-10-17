@@ -1,104 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Rental History</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to an external CSS file for styling -->
-</head>
-<body>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        
-        main {
-            padding: 20px;
-        }
-        
-        .item-list, .rental-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .item, .rental-item {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 10px 0;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .item-image {
-            width: 100px;
-            height: auto;
-            margin-right: 20px;
-        }
-        
-        .item-details {
-            flex: 1;
-        }
-        
-        .item-name {
-            font-size: 1.2em;
-            margin: 0;
-        }
-        
-        .item-description {
-            margin: 5px 0;
-        }
-        
-        .item-price {
-            font-weight: bold;
-            margin: 5px 0;
-        }
-        
-        .rent-button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        
-        .rent-button:hover {
-            background-color: #218838;
-        }
-        
-        .no-items, .no-rentals {
-            color: #888;
-            text-align: center;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-        }
-        
-    </style>
-    <header>
-        <h1>Your Rental History</h1>
-    </header>
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
     
-    <main>
-        <ul class="rental-list">
+    header {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+    }
+    
+    main {
+        padding: 20px;
+    }
+    
+    .item-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 0;
+        list-style-type: none;
+    }
+    
+    .item {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: calc(33.33% - 20px); /* Three items per row */
+        box-sizing: border-box;
+    }
+    
+    .item-image {
+        width: 100%;
+        height: auto;
+        max-width: 150px;
+        margin-bottom: 10px;
+    }
+    
+    .item-details {
+        text-align: center;
+    }
+    
+    .item-name {
+        font-size: 1.2em;
+        margin: 0;
+    }
+    
+    .item-description {
+        margin: 5px 0;
+    }
+    
+    .item-price {
+        font-weight: bold;
+        margin: 5px 0;
+    }
+    
+    .rent-button {
+        background-color: #28a745;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    
+    .rent-button:hover {
+        background-color: #218838;
+    }
+    
+    .no-items {
+        color: #888;
+        text-align: center;
+        width: 100%;
+    }
+  
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .item {
+            width: calc(50% - 20px); /* Two items per row for smaller screens */
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .item {
+            width: 100%; /* Full width on very small screens */
+        }
+    }
+</style>
+
+<main id="main">
+
+        <!-- ======= Intro Single ======= -->
+        <section class="intro-single">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12 col-lg-8">
+                  <div class="title-single-box">
+                    <h1 class="title-single">Rentals History</h1>
+                    <span class="color-text-a">List of all Properties Available for Rent</span>
+                  </div>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                  <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">
+                        Rentals 
+                      </li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <ul class="rental-list">
             {% for rental in rentals %}
                 <li class="rental-item">
                     <strong class="rental-item-name">{{ rental.item.name }}</strong>
@@ -113,10 +142,6 @@
                 <li class="no-rentals">You have no rental history.</li>
             {% endfor %}
         </ul>
-    </main>
+</main>
 
-    <footer>
-        <p>&copy; {{ current_year }} Your Company Name. All Rights Reserved.</p>
-    </footer>
-</body>
-</html>
+{% endblock %}
